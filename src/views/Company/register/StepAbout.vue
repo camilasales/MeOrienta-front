@@ -30,7 +30,7 @@
 
     <!-- texto com imagem de carregamento -->
     <v-col class="pa-0 mt-10" align-self="start" cols="12">
-      <span>Sobre você</span>
+      <span>Sobre a empresa</span>
     </v-col>
     <div class="mt-6">
       <v-avatar
@@ -74,18 +74,11 @@
           <v-col cols="12">
             <v-text-field
               outlined
-              v-model="form.name"
-              :rules="rules.name"
-              label="Nome"
+              v-model="form.nameResponsible"
+              :rules="rules.nameResponsible"
+              label="Nome do responsável"
               required
             ></v-text-field>
-          </v-col>
-          <v-col cols="12">
-            <inputDate
-              :input="{ label: 'Data de nascimento', rules: rules.date }"
-              :picker="{ type: 'date' }"
-              v-model="form.yearOld"
-            ></inputDate>
           </v-col>
           <v-col cols="12">
             <v-text-field
@@ -96,25 +89,42 @@
               required
             ></v-text-field>
           </v-col>
+          <v-col>
+            <v-text-field
+              outlined
+              v-model="form.businessType"
+              :rules="rules.businessType"
+              label="Endereço"
+              required
+            ></v-text-field>
+          </v-col>
           <v-col cols="12">
             <v-text-field
               outlined
-              v-model="form.cpf"
-              :rules="rules.cpf"
-              v-mask="['###.###.###-##']"
+              v-model="form.cpfCnpj"
+              :rules="rules.cpfCnpj"
+              v-mask="['###.###.###-##', '##.###.###/####-##']"
               label="CPF"
               required
             ></v-text-field>
           </v-col>
           <v-col cols="12">
-            <span
-              >Você quer se candidatar para vaga como Pessoa com
-              Deficiência?</span
-            >
-            <v-radio-group v-model="form.deficit" row>
-              <v-radio label="Sim" value="true"></v-radio>
-              <v-radio label="Nâo" value="false"></v-radio>
-            </v-radio-group>
+            <v-text-field
+              outlined
+              v-model="form.phone"
+              :rules="rules.phone"
+              v-mask="['(##)#####-####', '(##)####-####']"
+              label="Telefone"
+              required
+            ></v-text-field>
+          </v-col>
+          <v-col>
+            <v-text-field
+              outlined
+              v-model="form.webSite"
+              label="Website"
+              required
+            ></v-text-field>
           </v-col>
 
           <v-col cols="12" class="d-flex justify-center align-center">
@@ -125,62 +135,42 @@
         </v-row>
       </form>
     </v-container>
-    <responsibleAccount
-      v-model="openResponsibleAccount"
-      v-if="openResponsibleAccount"
-    ></responsibleAccount>
   </div>
 </template>
 <script>
-// import inputDate from "@src/components/inputs/inputDate.vue";
-import inputDate from "@/components/inputForm/inputDateForm.vue";
-import responsibleAccount from "@/components/dialogs/responsibleAccount.vue";
-import moment from "moment";
 export default {
   name: "StepAbout",
-  components: {
-    inputDate,
-    responsibleAccount,
-  },
   data() {
     return {
-      openResponsibleAccount: false,
       valid: "",
       showPassword: false,
-      dateNow: moment().format("YYYY"),
       form: {
-        name: "",
+        nameResponsible: "",
         email: "",
         password: "",
-        yearOld: null,
         adress: "",
-        cpf: "",
-        deficit: "false",
+        cpfCnpj: "",
+        businessType: "",
+        phone: "",
+        webSite: "",
       },
       rules: {
         email: [
           (v) => !!v || "Por favor, preeencha um e-mail válido",
           (v) => /.+@.+\..+/.test(v) || "E-mail must be valid",
         ],
-        name: [(v) => !!v || "Por favor, preeencha o nome"],
+        nameResponsible: [(v) => !!v || "Por favor, preeencha o nome"],
         adress: [(v) => !!v || "Por favor, preeencha o seu endereco"],
-        cpf: [(v) => !!v || "Por favor, preeencha o seu cpf"],
-        date: [
-          (v) => !!v || "Data é obrigatorio!",
+        cpfCnpj: [(v) => !!v || "Por favor, preeencha o CPF/CNPJ"],
+        businessType: [(v) => !!v || "Por favor, preeencha o ramo de atuação"],
+        phone: [
+          (v) => !!v || "Por favor preencha o telefone.",
           (v) => {
-            let yearBirth = moment(this.form.yearOld)
-              .date(1)
-              .format("YYYY");
-            let sub = this.dateNow - yearBirth;
-            if (sub >= 13 && sub <= 15) {
-              this.responsible();
-              return false;
-            } else if (sub <= 12) {
-              return `Cadastro não permitido`;
-            } else {
-              console.log(v);
-              return true;
-            }
+            v = v || "";
+            return (
+              v.length > 9 ||
+              "O número de telefone precisa ter mais 10 digitos."
+            );
           },
         ],
       },
@@ -193,13 +183,6 @@ export default {
   },
 
   methods: {
-    responsible() {
-      let yearDiff = moment()
-        .year(this.form.yearOld)
-        .format("YYYY");
-      console.log("abriu", yearDiff);
-      this.openResponsibleAccount = true;
-    },
     saveForm() {
       return this.$router.push({
         name: "Formacao",

@@ -44,7 +44,11 @@
                 class="d-flex align-center justify-start"
               >
                 <img :src="require('@/assets/img/3.png')" />
-                <span class="subtitle ml-3 span-color"> Teste vocacional</span>
+                <router-link
+                  class="subtitle ml-3 span-color"
+                  :to="{ name: 'VocationalTest' }"
+                  >Teste vocacional</router-link
+                >
               </v-col>
               <v-col
                 cols="7"
@@ -145,7 +149,7 @@ export default {
   data() {
     return {
       show: false,
-      value: 1,
+      value: 0,
       active: true,
       listJobs: [
         {
@@ -175,6 +179,7 @@ export default {
 </script>
 <style scope>
 .span-color {
-  color: #ffffff;
+  color: #ffffff !important;
+  text-decoration: none;
 }
 </style>

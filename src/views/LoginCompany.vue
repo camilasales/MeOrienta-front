@@ -1,15 +1,10 @@
 <template>
-  <v-row
-    no-gutters
-    justify="center"
-    style="background-color:#ff004e"
-    class="px-6 pt-2"
-  >
+  <v-row no-gutters justify="center" class="px-6 pt-2">
     <!-- #ff004e -->
     <v-col align-self="start" cols="12">
       <img
         :height="$vuetify.breakpoint.smAndUp ? '250' : '150'"
-        :src="require('@/assets/img/logo-meorienta.svg')"
+        :src="require('@/assets/img/logo-meorienta-rosa.svg')"
       />
     </v-col>
     <div>
@@ -29,7 +24,6 @@
               <v-text-field
                 color="#ffffff"
                 outlined
-                dark
                 v-model="email"
                 :rules="emailRules"
                 label="E-mail"
@@ -40,7 +34,6 @@
               <v-text-field
                 color="#ffffff"
                 outlined
-                dark
                 v-model="password"
                 :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
                 :rules="[passwordRules.required, passwordRules.min]"
@@ -54,16 +47,16 @@
               <v-col>
                 <v-btn
                   outlined
-                  color="#ffffff"
                   class="mb-8 mr-5"
+                  color="#ff004e"
                   :to="{ name: 'Index' }"
                   >Voltar</v-btn
                 >
-                <v-btn outlined color="#ffffff" class="mb-8 ">Entrar</v-btn>
+                <v-btn outlined class="mb-8" color="#ff004e">Entrar</v-btn>
               </v-col>
               <span>Não possui cadastro? Não seja por isso!</span>
               <v-btn
-                :to="{ name: 'Cadastro' }"
+                :to="{ path: '/cadastro' }"
                 text
                 style="border-bottom: 1px solid  #000000; color:#000000"
                 >Cadatre-se</v-btn
@@ -102,22 +95,10 @@ export default {
   font-size: 8vw;
 }
 span {
-  color: #ffffff;
+  /* color: #ffffff; */
   text-decoration: inherit;
 }
-.v-application .error--text {
-  color: #ffffff !important;
-  caret-color: #ffffff !important;
-  border-color: #ffffff !important;
-}
-.v-messages__message .error--text {
-  color: #ffffff !important;
-  caret-color: #ffffff !important;
-  border-color: #ffffff !important;
-}
-.error--text {
-  color: rgb(0, 217, 255) !important;
-}
+
 .input__label {
   color: black;
 }
