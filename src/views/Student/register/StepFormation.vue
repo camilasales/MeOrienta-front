@@ -1,31 +1,34 @@
 <template>
   <div class="px-5 pt-2 d-flex align-center justif-center flex-column">
     <v-col
-      class="d-flex flex-row align-center justify-space-between"
+      class="d-flex flex-row align-center justify-space-between pa-0"
       align-self="start"
-      cols="12"
+      cols="10"
+      md="12"
+      lg="12"
+      sm="12"
     >
-      <img
-        height="100"
-        :src="require('@/assets/img/logo-meorienta-rosa.svg')"
-      />
-      <h3>Formação</h3>
+      <div>
+        <img
+          :height="$vuetify.breakpoint.smAndUp ? '100' : '80'"
+          :src="require('@/assets/img/logo-meorienta-rosa.svg')"
+        />
+        <h3>Formação</h3>
+      </div>
+
+      <!-- passos do cadastro 1 2 -->
+      <v-col cols="10" md="4" lg="4" sm="7">
+        <v-stepper class="elevation-0" light v-model="step">
+          <v-stepper-header class="elevation-0">
+            <v-stepper-step step="1"> </v-stepper-step>
+            <v-divider></v-divider>
+            <v-stepper-step step="2"> </v-stepper-step>
+          </v-stepper-header>
+        </v-stepper>
+      </v-col>
     </v-col>
 
-    <!-- passos do cadastro 1 2 -->
-    <v-col cols="12" md="5" lg="5">
-      <v-stepper class="elevation-0" v-model="step">
-        <v-stepper-header class="elevation-0">
-          <v-stepper-step step="1"> </v-stepper-step>
-
-          <v-divider></v-divider>
-
-          <v-stepper-step step="2"> </v-stepper-step>
-        </v-stepper-header>
-      </v-stepper>
-    </v-col>
-
-    <v-col align-self="start" cols="12">
+    <v-col class="pa-0 mt-10 mb-6" align-self="start" cols="12">
       <span>Sua experiência</span>
     </v-col>
 
@@ -85,7 +88,7 @@
           </v-col>
 
           <v-col cols="12" class="d-flex justify-center align-center">
-            <v-btn color="#ff004e" dark>
+            <v-btn color="#ff004e" dark @click="saveForm()">
               salvar e continuar
             </v-btn>
           </v-col>
@@ -128,7 +131,13 @@ export default {
     };
   },
 
-  methods: {},
+  methods: {
+    saveForm() {
+      return this.$router.push({
+        name: "Perfil",
+      });
+    },
+  },
 };
 </script>
 <style scoped>

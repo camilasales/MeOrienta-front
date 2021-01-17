@@ -1,35 +1,38 @@
 <template>
-  <div class="px-5 pt-2 d-flex align-center justif-center flex-column">
+  <div class="px-5 pt-2 d-flex align-center justif-start flex-column">
     <v-col
-      class="d-flex flex-row align-center justify-space-between"
+      class="d-flex flex-row align-center justify-space-between pa-0"
       align-self="start"
-      cols="12"
+      cols="10"
+      md="12"
+      lg="12"
+      sm="12"
     >
-      <img
-        height="100"
-        :src="require('@/assets/img/logo-meorienta-rosa.svg')"
-      />
-      <h3>Cadastro</h3>
-    </v-col>
+      <div>
+        <img
+          :height="$vuetify.breakpoint.smAndUp ? '100' : '80'"
+          :src="require('@/assets/img/logo-meorienta-rosa.svg')"
+        />
+        <h3>Cadastro</h3>
+      </div>
 
-    <!-- passos do cadastro 1 2 -->
-    <v-col cols="12" md="5" lg="5">
-      <v-stepper class="elevation-0" alt-labels>
-        <v-stepper-header>
-          <v-stepper-step step="1"> </v-stepper-step>
-
-          <v-divider></v-divider>
-
-          <v-stepper-step step="2"> </v-stepper-step>
-        </v-stepper-header>
-      </v-stepper>
+      <!-- passos do cadastro 1 2 -->
+      <v-col cols="10" md="4" lg="4" sm="7">
+        <v-stepper class="elevation-0" light>
+          <v-stepper-header class="elevation-0">
+            <v-stepper-step step="1"> </v-stepper-step>
+            <v-divider></v-divider>
+            <v-stepper-step step="2"> </v-stepper-step>
+          </v-stepper-header>
+        </v-stepper>
+      </v-col>
     </v-col>
 
     <!-- texto com imagem de carregamento -->
-    <v-col align-self="start" cols="12">
+    <v-col class="pa-0 mt-10" align-self="start" cols="12">
       <span>Sobre você</span>
     </v-col>
-    <div>
+    <div class="mt-6">
       <v-avatar
         size="160"
         style="border: 0.7px solid #cecece !important; display:flex; position:relative"

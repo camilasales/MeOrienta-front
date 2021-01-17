@@ -7,7 +7,10 @@
   >
     <!-- #ff004e -->
     <v-col align-self="start" cols="12">
-      <img height="200" :src="require('@/assets/img/logo-meorienta.svg')" />
+      <img
+        :height="$vuetify.breakpoint.smAndUp ? '250' : '150'"
+        :src="require('@/assets/img/logo-meorienta.svg')"
+      />
     </v-col>
     <div>
       <v-col

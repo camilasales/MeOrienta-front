@@ -3,6 +3,7 @@ import VueRouter from "vue-router";
 import Login from "../views/Login.vue";
 import StepAbout from "../views/Student/register/StepAbout.vue";
 import StepFormation from "@/views/Student/register/StepFormation.vue";
+import ProfileEnter from "@/views/Student/ProfileStudent/ProfileEnter.vue";
 
 Vue.use(VueRouter);
 
@@ -21,6 +22,11 @@ const routes = [
     path: "/cadastro-formacao",
     name: "Formacao",
     component: StepFormation,
+  },
+  {
+    path: "/perfil",
+    name: "Perfil",
+    component: ProfileEnter,
   },
   {
     path: "*",
