@@ -1,5 +1,5 @@
 <template>
-  <v-app id="app">
+  <v-app id="app" >
     <router-view />
   </v-app>
 </template>
@@ -16,4 +16,7 @@ export default {
 };
 </script>
 <style  lang="scss">
+h1 h2 h3 h4 h5 h5{
+  font-family: 'Roboto Slab', serif !important;
+}
 </style>
