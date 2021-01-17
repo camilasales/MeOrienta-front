@@ -110,25 +110,34 @@
       </v-col>
     </v-row>
 
-    <div class="px-4 d-flex flex-row">
-      <v-card width="300" class="mb-6 mr-6" v-for="n in 3" :key="n">
-        <v-img
-          class="white--text align-end"
-          :height="$vuetify.breakpoint.smAndUp ? '200' : 'auto'"
-          :src="require('@/assets/img/vaga.png')"
-        >
-        </v-img>
+    <v-row no-gutters class="px-4">
+      <v-col
+        cols="12"
+        md="3"
+        lg="3"
+        sm="5"
+        v-for="(item, index) in listJobs"
+        :key="index"
+      >
+        <v-card width="300" class="mb-6 mr-6">
+          <v-img
+            class="white--text align-end"
+            :height="$vuetify.breakpoint.smAndUp ? '200' : 'auto'"
+            :src="require('@/assets/img/vaga.png')"
+          >
+          </v-img>
 
-        <v-card-text class="text--primary">
-          <p class="headline">Estágio administração</p>
-          <p class="pb-0 mb-0">Estágio</p>
-          <p>Fortaleza/CE</p>
-          <v-btn class="my-4 mx-0" color="#ff004e" dark>
-            candidatar
-          </v-btn>
-        </v-card-text>
-      </v-card>
-    </div>
+          <v-card-text class="text--primary">
+            <p class="headline">{{ item.name }}</p>
+            <p class="pb-0 mb-0">{{ item.type }}</p>
+            <p>{{ item.location }}</p>
+            <v-btn class="my-4 mx-0" color="#ff004e" dark>
+              candidatar
+            </v-btn>
+          </v-card-text>
+        </v-card>
+      </v-col>
+    </v-row>
   </div>
 </template>
 <script>
@@ -138,6 +147,28 @@ export default {
       show: false,
       value: 1,
       active: true,
+      listJobs: [
+        {
+          name: "Estágio administração",
+          type: "Estágio",
+          location: "Fortaleza/CE",
+        },
+        {
+          name: "Auxiliar administrativo",
+          type: "Jovem aprendiz",
+          location: "Fortaleza/CE",
+        },
+        {
+          name: "Supervisor de Atendimento ao Cliente",
+          type: "Jovem aprendiz",
+          location: "São Paulo/SP",
+        },
+        {
+          name: "Auxiliar de Faturamento e Escrita Fiscal",
+          type: "Jovem aprendiz",
+          location: "Curitiba/Pr",
+        },
+      ],
     };
   },
 };
