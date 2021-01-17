@@ -185,7 +185,7 @@ export default {
   methods: {
     saveForm() {
       return this.$router.push({
-        name: "Formacao",
+        path: "/perfil-empresa",
       });
     },
   },

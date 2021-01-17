@@ -56,7 +56,7 @@
               </v-col>
               <span>Não possui cadastro? Não seja por isso!</span>
               <v-btn
-                :to="{ path: '/cadastro' }"
+                :to="{ path: '/cadastro-empresa' }"
                 text
                 style="border-bottom: 1px solid  #000000; color:#000000"
                 >Cadatre-se</v-btn

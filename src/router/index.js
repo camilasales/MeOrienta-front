@@ -11,6 +11,7 @@ import Index from "../views/Index.vue";
 // import views Company
 import RegisteringCompany from "@/views/Company/register/Registering.vue";
 import StepAboutCompany from "@/views/Company/register/StepAbout.vue";
+import ProfileEnterCompany from "@/views/Company/ProfileCompany/ProfileEnter.vue";
 
 // import component
 import Introduction from "@/components/vocationalTest/introduction.vue";
@@ -34,7 +35,7 @@ const routes = [
     component: LoginCompany,
   },
   {
-    path: "/cadastro",
+    path: "/cadastro-empresa",
     name: "RegisteringCompany",
     component: RegisteringCompany,
     children: [
@@ -43,6 +44,17 @@ const routes = [
         component: StepAboutCompany,
       },
     ],
+  },
+  {
+    path: "/perfil-empresa",
+    name: "ProfileEnterCompany",
+    component: ProfileEnterCompany,
+    // children: [
+    //   {
+    //     path: "",
+    //     component: StepAboutCompany,
+    //   },
+    // ],
   },
   {
     path: "/cadastro",
