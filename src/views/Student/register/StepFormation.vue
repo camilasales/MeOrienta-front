@@ -34,71 +34,55 @@
       <form>
         <v-row no-gutters justify="space-around">
           <v-col cols="12">
-            <v-text-field
+            <v-autocomplete
+              v-model="formFormation.formation"
+              :items="itemsFormation"
               outlined
-              v-model="form.email"
-              :rules="rules.email"
-              label="E-mail"
+              label="Formação"
+            ></v-autocomplete>
+          </v-col>
+          <v-col cols="12">
+            <v-autocomplete
+              v-model="formFormation.formationStatus"
+              :items="itemsFormationStatus"
+              outlined
+              label="Status"
+            ></v-autocomplete>
+          </v-col>
+          <v-col cols="12">
+            <v-text-field
+              v-if="
+                formFormation.formation != 'Ensino Médio' &&
+                  formFormation.formation != null
+              "
+              outlined
+              v-model="formFormation.nameCourse"
+              :rules="rules.nameCourse"
+              label="Nome do Curso"
               required
             ></v-text-field>
           </v-col>
           <v-col cols="12">
             <v-text-field
               outlined
-              v-model="form.password"
-              :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
-              :rules="[passwordRules.required, passwordRules.min]"
-              :type="showPassword ? 'text' : 'password'"
-              name="input-10-1"
-              label="Senha"
-              @click:append="showPassword = !showPassword"
-            ></v-text-field>
-          </v-col>
-          <v-col cols="12">
-            <v-text-field
-              outlined
-              v-model="form.name"
-              :rules="rules.name"
-              label="Nome"
+              v-model="formFormation.instituition"
+              :rules="rules.instituition"
+              label="Nome da Instituição"
               required
             ></v-text-field>
           </v-col>
           <v-col cols="12">
             <inputDate
-              :input="{ label: 'Data de nascimento', rules: rules.date }"
+              :input="{ label: 'Data de Inicio', rules: rules.dateStart }"
               :picker="{ type: 'date' }"
-              v-model="form.yearOld"
+              v-model="formFormation.dateStart"
+            ></inputDate>
+            <inputDate
+              :input="{ label: 'Data de Fim', rules: rules.dateEnd }"
+              :picker="{ type: 'date' }"
+              v-model="formFormation.dateEnd"
             ></inputDate>
           </v-col>
-          <v-col cols="12">
-            <v-text-field
-              outlined
-              v-model="form.adress"
-              :rules="rules.adress"
-              label="Endereço"
-              required
-            ></v-text-field>
-          </v-col>
-          <v-col cols="12">
-            <v-text-field
-              outlined
-              v-model="form.cpf"
-              :rules="rules.cpf"
-              v-mask="['###.###.###-##', '##.###.###/####-##']"
-              label="CPF"
-              required
-            ></v-text-field>
-          </v-col>
-          <!-- <v-col cols="12">
-            <span
-              >Você quer se candidatar para vaga como Pessoa com
-              Deficiência?</span
-            >
-            <v-radio-group v-model="form.deficit" row>
-              <v-radio label="Sim" value="true"></v-radio>
-              <v-radio label="Nâo" value="false"></v-radio>
-            </v-radio-group>
-          </v-col> -->
 
           <v-col cols="12" class="d-flex justify-center align-center">
             <v-btn color="#ff004e" dark>
@@ -108,83 +92,43 @@
         </v-row>
       </form>
     </v-container>
-    <responsibleAccount
-      v-model="openResponsibleAccount"
-      v-if="openResponsibleAccount"
-    ></responsibleAccount>
   </div>
 </template>
 <script>
-// import inputDate from "@src/components/inputs/inputDate.vue";
 import inputDate from "@/components/inputForm/inputDateForm.vue";
-import responsibleAccount from "@/components/dialogs/responsibleAccount.vue";
 import moment from "moment";
 export default {
   name: "StepFormation",
   components: {
     inputDate,
-    responsibleAccount,
   },
   data() {
     return {
       step: 2,
-      openResponsibleAccount: false,
       valid: "",
-      showPassword: false,
       dateNow: moment().format("YYYY"),
-      form: {
-        name: "",
-        email: "",
-        password: "",
-        yearOld: null,
-        adress: "",
-        cpf: "",
-        deficit: "false",
+      itemsFormation: ["Ensino Médio", "Ensino Técnico", "Ensino Superior"],
+      itemsFormationStatus: ["Cursando", "Finalizado"],
+      formFormation: {
+        nameCourse: "",
+        instituition: "",
+        dateStart: null,
+        dateEnd: null,
+        formation: null,
+        formationStatus: null,
       },
       rules: {
-        email: [
-          (v) => !!v || "Por favor, preeencha um e-mail válido",
-          (v) => /.+@.+\..+/.test(v) || "E-mail must be valid",
+        nameCourse: [(v) => !!v || "Por favor, preeencha o curso"],
+        instituition: [
+          (v) => !!v || "Por favor, preeencha o nome da instituição",
         ],
-        name: [(v) => !!v || "Por favor, preeencha o nome"],
-        adress: [(v) => !!v || "Por favor, preeencha o seu endereco"],
-        cpf: [(v) => !!v || "Por favor, preeencha o seu cpf"],
-        date: [
-          (v) => !!v || "Data é obrigatorio!",
-          (v) => {
-            let yearBirth = moment(this.form.yearOld)
-              .date(1)
-              .format("YYYY");
-            let sub = this.dateNow - yearBirth;
-            if (sub >= 13 && sub <= 15) {
-              this.responsible();
-              return false;
-            } else if (sub <= 12) {
-              return `Cadastro não permitido`;
-            } else {
-              console.log(v);
-              return true;
-            }
-          },
-        ],
-      },
-
-      passwordRules: {
-        required: (value) => !!value || "Por favor, preencha a senha.",
-        min: (v) => v.length >= 8 || "A senha deve ter no minímo 8 caracteres",
+        dateStart: [(v) => !!v || "Data é obrigatorio!"],
+        dateEnd: [(v) => !!v || "Data é obrigatorio!"],
       },
     };
   },
 
-  methods: {
-    responsible() {
-      let yearDiff = moment()
-        .year(this.form.yearOld)
-        .format("YYYY");
-      console.log("abriu", yearDiff);
-      this.openResponsibleAccount = true;
-    },
-  },
+  methods: {},
 };
 </script>
 <style scoped>
