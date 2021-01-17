@@ -12,6 +12,8 @@ import Index from "../views/Index.vue";
 import RegisteringCompany from "@/views/Company/register/Registering.vue";
 import StepAboutCompany from "@/views/Company/register/StepAbout.vue";
 import ProfileEnterCompany from "@/views/Company/ProfileCompany/ProfileEnter.vue";
+import candidateProfile from "@/views/Company/ProfileCompany/candidateProfile.vue";
+import jobsDisponibility from "@/views/Company/ProfileCompany/jobsDisponibility.vue";
 
 // import component
 import Introduction from "@/components/vocationalTest/introduction.vue";
@@ -49,12 +51,17 @@ const routes = [
     path: "/perfil-empresa",
     name: "ProfileEnterCompany",
     component: ProfileEnterCompany,
-    // children: [
-    //   {
-    //     path: "",
-    //     component: StepAboutCompany,
-    //   },
-    // ],
+    children: [
+      {
+        path: "",
+        component: candidateProfile,
+      },
+      {
+        path: "/perfil-vagas",
+        name: "jobs-disponibility",
+        component: jobsDisponibility,
+      },
+    ],
   },
   {
     path: "/cadastro",

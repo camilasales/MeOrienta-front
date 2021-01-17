@@ -8,13 +8,13 @@
         color="#ff004e"
         :input-value="active"
       >
-        <v-btn>
+        <v-btn :to="{ path: '/perfil-empresa' }">
           <span>Perfis</span>
 
           <v-icon>mdi-bag-checked </v-icon>
         </v-btn>
 
-        <v-btn>
+        <v-btn :to="{ path: 'perfil-vagas' }">
           <span>Minhas Vagas</span>
 
           <v-icon>mdi-calendar </v-icon>
@@ -32,6 +32,17 @@
         </v-btn>
       </v-bottom-navigation>
     </v-card>
+    <v-row no-gutters class="pa-4">
+      <v-col>
+        <v-text-field
+          dense
+          outlined
+          label="Pesquisar ..."
+          prepend-inner-icon="mdi-magnify "
+          append-outer-icon="mdi-car-shift-pattern "
+        ></v-text-field>
+      </v-col>
+    </v-row>
     <router-view />
   </div>
 </template>

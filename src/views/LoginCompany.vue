@@ -58,7 +58,7 @@
               <v-btn
                 :to="{ path: '/cadastro-empresa' }"
                 text
-                style="border-bottom: 1px solid  #000000; color:#000000"
+                style="border-bottom: 1px solid  #ff004e; color:#ff004e"
                 >Cadatre-se</v-btn
               >
             </div>

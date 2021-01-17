@@ -114,38 +114,15 @@
       </v-col>
     </v-row>
 
-    <v-row no-gutters class="px-4">
-      <v-col
-        cols="12"
-        md="3"
-        lg="3"
-        sm="5"
-        v-for="(item, index) in listJobs"
-        :key="index"
-      >
-        <v-card width="300" class="mb-6 mr-6">
-          <v-img
-            class="white--text align-end"
-            :height="$vuetify.breakpoint.smAndUp ? '200' : 'auto'"
-            :src="require('@/assets/img/vaga.png')"
-          >
-          </v-img>
-
-          <v-card-text class="text--primary">
-            <p class="headline">{{ item.name }}</p>
-            <p class="pb-0 mb-0">{{ item.type }}</p>
-            <p>{{ item.location }}</p>
-            <v-btn class="my-4 mx-0" color="#ff004e" dark>
-              candidatar
-            </v-btn>
-          </v-card-text>
-        </v-card>
-      </v-col>
-    </v-row>
+    <jobOpportunity :listJobs="listJobs"></jobOpportunity>
   </div>
 </template>
 <script>
+import jobOpportunity from "@/components/profile/jobOpportunity.vue";
 export default {
+  components: {
+    jobOpportunity,
+  },
   data() {
     return {
       show: false,
