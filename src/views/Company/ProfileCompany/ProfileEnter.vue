@@ -11,19 +11,19 @@
         <v-btn :to="{ path: '/perfil-empresa' }">
           <span>Perfis</span>
 
-          <v-icon>mdi-bag-checked </v-icon>
+          <v-icon>mdi-account</v-icon>
         </v-btn>
 
         <v-btn :to="{ path: 'perfil-vagas' }">
           <span>Minhas Vagas</span>
 
-          <v-icon>mdi-calendar </v-icon>
+          <v-icon>mdi-bag-checked </v-icon>
         </v-btn>
 
         <v-btn>
           <span>Meus Eventos</span>
 
-          <v-icon>mdi-domain </v-icon>
+          <v-icon>mdi-calendar</v-icon>
         </v-btn>
         <v-btn>
           <span>Meus Cursos</span>

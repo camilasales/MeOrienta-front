@@ -89,12 +89,12 @@
               required
             ></v-text-field>
           </v-col>
-          <v-col>
+          <v-col cols="12">
             <v-text-field
               outlined
               v-model="form.businessType"
               :rules="rules.businessType"
-              label="Endereço"
+              label="Ramo de atuação"
               required
             ></v-text-field>
           </v-col>
@@ -118,7 +118,7 @@
               required
             ></v-text-field>
           </v-col>
-          <v-col>
+          <v-col cols="12">
             <v-text-field
               outlined
               v-model="form.webSite"
