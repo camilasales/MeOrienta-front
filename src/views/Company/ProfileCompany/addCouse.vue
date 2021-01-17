@@ -8,19 +8,11 @@
         <form>
           <v-row no-gutters justify="space-around">
             <v-col cols="12">
-              <v-autocomplete
-                v-model="form.typeEvent"
-                :items="itemsFormation"
-                outlined
-                label="Status"
-              ></v-autocomplete>
-            </v-col>
-            <v-col cols="12">
               <v-text-field
                 outlined
                 v-model="form.title"
                 :rules="rules.title"
-                label="Título da vaga"
+                label="Título da curso"
                 required
               ></v-text-field>
             </v-col>
@@ -29,7 +21,7 @@
                 outlined
                 v-model="form.description"
                 :rules="rules.description"
-                label="Descrição "
+                label="Descrição"
                 required
               ></v-textarea>
             </v-col>

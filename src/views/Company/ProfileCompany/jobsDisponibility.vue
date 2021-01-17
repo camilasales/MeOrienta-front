@@ -110,14 +110,14 @@
                 dense
                 hide-details
                 hint
-                v-model="isConfidential"
+                v-model="form.isConfidential"
                 label="Publicar como confidencial"
               ></v-checkbox>
               <v-checkbox
                 dense
                 hint
                 hide-details
-                v-model="isYoungerAge"
+                v-model="form.isYoungerAge"
                 label="Restringir para menores de idade"
               ></v-checkbox>
             </v-col>

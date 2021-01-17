@@ -14,6 +14,8 @@ import StepAboutCompany from "@/views/Company/register/StepAbout.vue";
 import ProfileEnterCompany from "@/views/Company/ProfileCompany/ProfileEnter.vue";
 import candidateProfile from "@/views/Company/ProfileCompany/candidateProfile.vue";
 import jobsDisponibility from "@/views/Company/ProfileCompany/jobsDisponibility.vue";
+import addEvent from "@/views/Company/ProfileCompany/addEvent.vue";
+import addCouse from "@/views/Company/ProfileCompany/addCouse.vue";
 
 // import component
 import Introduction from "@/components/vocationalTest/introduction.vue";
@@ -60,6 +62,16 @@ const routes = [
         path: "/perfil-vagas",
         name: "jobs-disponibility",
         component: jobsDisponibility,
+      },
+      {
+        path: "/criar-evento",
+        name: "create-events",
+        component: addEvent,
+      },
+      {
+        path: "/criar-curso",
+        name: "create-course",
+        component: addCouse,
       },
     ],
   },
