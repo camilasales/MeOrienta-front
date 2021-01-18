@@ -23,7 +23,7 @@
         <h1 class="title-login">login</h1>
       </v-col>
       <v-col cols="12" align-self="center">
-        <v-form ref="form" v-model="valid" lazy-validation>
+        <v-form ref="form" lazy-validation>
           <v-row no-gutters align-self="center" justify="center">
             <v-col cols="12">
               <v-text-field
@@ -33,11 +33,12 @@
                 v-model="email"
                 :rules="emailRules"
                 label="E-mail"
-                required
+                validate-on-blur
               ></v-text-field>
             </v-col>
             <v-col cols="12">
               <v-text-field
+                validate-on-blur
                 color="#ffffff"
                 outlined
                 dark
@@ -59,7 +60,14 @@
                   :to="{ name: 'Index' }"
                   >Voltar</v-btn
                 >
-                <v-btn outlined color="#ffffff" class="mb-8 ">Entrar</v-btn>
+                <v-btn
+                  outlined
+                  color="#ffffff"
+                  class="mb-8"
+                  :loading="loading"
+                  @click="login()"
+                  >Entrar</v-btn
+                >
               </v-col>
               <span>Não possui cadastro? Não seja por isso!</span>
               <v-btn
@@ -76,10 +84,12 @@
   </v-row>
 </template>
 <script>
+// import { mapActions, mapState, mapGetters } from 'vuex';
+// import axios from "axios";
 export default {
   data() {
     return {
-      valid: "",
+      loading: false,
       showPassword: false,
       password: "",
       passwordRules: {
@@ -92,6 +102,19 @@ export default {
         (v) => /.+@.+\..+/.test(v) || "E-mail must be valid",
       ],
     };
+  },
+  methods: {
+    login() {
+      if (this.$refs.form.validate()) {
+        this.loading = true;
+        setTimeout(() => {
+          this.loading = false;
+          return this.$router.push({
+            path: "/perfil-estudante",
+          });
+        }, 4000);
+      }
+    },
   },
 };
 </script>
