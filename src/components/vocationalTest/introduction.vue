@@ -45,7 +45,7 @@
     <v-row class="mt-16">
       <!-- passos do cadastro 1 2 -->
       <v-col>
-        <v-btn outlined :to="{ name: 'Perfil' }">
+        <v-btn outlined :to="{ path: 'perfil-estudante' }">
           voltar
         </v-btn>
       </v-col>

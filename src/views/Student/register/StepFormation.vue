@@ -134,7 +134,7 @@ export default {
   methods: {
     saveForm() {
       return this.$router.push({
-        name: "Perfil",
+        path: "/perfil-estudante",
       });
     },
   },

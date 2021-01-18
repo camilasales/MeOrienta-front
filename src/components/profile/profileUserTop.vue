@@ -36,21 +36,28 @@
       <v-expand-transition>
         <div v-show="show">
           <div class="d-flex flex-column align-center justify-center">
-            <v-row justify="center" class="px-0">
+            <v-row
+              justify="center"
+              class="px-0"
+              v-for="(item, index) in links"
+              :key="index"
+            >
               <v-col
-                cols="7"
+                cols="9"
                 md="4"
                 lg="4"
                 class="d-flex align-center justify-start"
               >
-                <img :src="require('@/assets/img/3.png')" />
-                <router-link
+                <img :src="item.icon" />
+                <v-btn
+                  text
                   class="subtitle ml-3 span-color"
-                  :to="{ name: 'VocationalTest' }"
-                  >Teste vocacional</router-link
+                  @click="enterRouter(item.router)"
+                >
+                  {{ item.name }}</v-btn
                 >
               </v-col>
-              <v-col
+              <!-- <v-col
                 cols="7"
                 md="4"
                 lg="4"
@@ -67,7 +74,7 @@
               >
                 <img :src="require('@/assets/img/1.png')" />
                 <span class="subtitle ml-3 span-color"> Comunidade</span>
-              </v-col>
+              </v-col> -->
             </v-row>
           </div>
         </div>
@@ -92,7 +99,7 @@ export default {
       required: true,
     },
     links: {
-      type: Object,
+      type: Array,
       required: false,
       default: null,
     },
@@ -103,8 +110,19 @@ export default {
     };
   },
   computed: {},
-  methods: {},
+  methods: {
+    enterRouter(routerName) {
+      return this.$router.push({
+        path: routerName,
+      });
+    },
+  },
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.span-color {
+  color: #ffffff !important;
+  text-decoration: none;
+}
+</style>

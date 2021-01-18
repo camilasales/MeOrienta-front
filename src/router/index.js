@@ -1,12 +1,16 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-// import views Student
-import StepAbout from "../views/Student/register/StepAbout.vue";
-import StepFormation from "@/views/Student/register/StepFormation.vue";
-import ProfileEnter from "@/views/Student/ProfileStudent/ProfileEnter.vue";
+
+// logins
+import Index from "../views/Index.vue";
 import LoginCompany from "../views/LoginCompany.vue";
 import LoginStudent from "../views/Login.vue";
-import Index from "../views/Index.vue";
+
+// import views Student
+import ProfileAccount from "@/views/Student/ProfileStudent/ProfileAccount.vue";
+import searchJobs from "@/views/Student/ProfileStudent/searchJobs.vue";
+import StepAbout from "../views/Student/register/StepAbout.vue";
+import StepFormation from "@/views/Student/register/StepFormation.vue";
 
 // import views Company
 import RegisteringCompany from "@/views/Company/register/Registering.vue";
@@ -38,6 +42,8 @@ const routes = [
     name: "LoginCompany",
     component: LoginCompany,
   },
+
+  // rotas do perfil da empresa
   {
     path: "/cadastro-empresa",
     name: "RegisteringCompany",
@@ -59,22 +65,24 @@ const routes = [
         component: candidateProfile,
       },
       {
-        path: "/perfil-vagas",
+        path: "/empresa-perfil-vagas",
         name: "jobs-disponibility",
         component: jobsDisponibility,
       },
       {
-        path: "/criar-evento",
+        path: "/empresa-criar-evento",
         name: "create-events",
         component: addEvent,
       },
       {
-        path: "/criar-curso",
+        path: "/empresa-criar-curso",
         name: "create-course",
         component: addCouse,
       },
     ],
   },
+
+  // rotas perfil do estudante
   {
     path: "/cadastro",
     name: "Cadastro",
@@ -86,15 +94,22 @@ const routes = [
     component: StepFormation,
   },
   {
-    path: "/perfil",
-    name: "Perfil",
-    component: ProfileEnter,
+    path: "/perfil-estudante",
+    name: "ProfileAccountStudent",
+    component: ProfileAccount,
+    children: [
+      {
+        path: "",
+        component: searchJobs,
+      },
+    ],
   },
   {
     path: "/teste-vocacional",
     name: "VocationalTest",
     component: Introduction,
   },
+
   {
     path: "*",
     redirect: "/",

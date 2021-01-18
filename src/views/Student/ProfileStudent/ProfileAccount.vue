@@ -1,31 +1,35 @@
 <template>
   <div>
     <v-card>
-      <profileUserTop :name="name" :description="description"></profileUserTop>
+      <profileUserTop
+        :name="name"
+        :description="description"
+        :links="links"
+      ></profileUserTop>
       <v-bottom-navigation
         background-color="#d9d9d9"
         :value="value"
         color="#ff004e"
         :input-value="active"
       >
-        <v-btn @click="changeOption('/perfil-empresa', 0)">
+        <v-btn @click="changeOption('/perfil-estudante', 0)">
           <span>Perfis</span>
 
           <v-icon>mdi-account</v-icon>
         </v-btn>
 
-        <v-btn @click="changeOption('/empresa-perfil-vagas', 1)">
+        <v-btn>
           <span>Minhas Vagas</span>
 
           <v-icon>mdi-bag-checked </v-icon>
         </v-btn>
 
-        <v-btn @click="changeOption('/empresa-criar-evento', 2)">
+        <v-btn>
           <span>Meus Eventos</span>
 
           <v-icon>mdi-calendar</v-icon>
         </v-btn>
-        <v-btn @click="changeOption('/empresa-criar-curso', 3)">
+        <v-btn>
           <span>Meus Cursos</span>
 
           <v-icon>mdi-medal-outline </v-icon>
@@ -54,8 +58,25 @@ export default {
   },
   data() {
     return {
-      name: "CCR",
-      description: "Transportando idéias",
+      name: "João Augusto da Silva",
+      description: "Estudante do ensino médio; artista; músico",
+      links: [
+        {
+          name: "Teste vocacional",
+          router: "teste-vocacional",
+          icon: require("@/assets/img/3.png"),
+        },
+        {
+          name: "Currículo pdf",
+          router: "",
+          icon: require("@/assets/img/2.png"),
+        },
+        {
+          name: "Comunidade",
+          router: "",
+          icon: require("@/assets/img/1.png"),
+        },
+      ],
       value: 0,
       active: true,
     };
