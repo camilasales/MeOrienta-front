@@ -1,7 +1,6 @@
 # MeOrienta
 
-Criado para pessoas desasistidas e aspirantes a emprego:
-O MeOrienta tem o intuito de mostrar a importância das matérias da escola relacionadas com a sua profissão que melhor agrada.
+O Projeto da plataforma ME ORIENTA foi idealizado para aproximar o jovem do futuro, dos estudos e de empresas que valorizam a formação educacional e profissional novas gerações! O engajamento das empresas a plataforma ME ORIENTA se dará com a constatação de que nosso sistema proporcionará um retorno tangível para as mesmas, através de uma redução média de 78% do tempo de divulgação e atração no processo seletivo com a utilização da ferramenta funil de recrutamento
 
 # Dependências
 

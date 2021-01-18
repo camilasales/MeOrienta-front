@@ -21,7 +21,7 @@
           </v-col>
         </v-card-text>
         <v-card-actions>
-          <form>
+          <v-form ref="form">
             <v-row no-gutters justify="space-around">
               <v-col cols="12">
                 <v-text-field
@@ -30,6 +30,7 @@
                   :rules="rules.name"
                   label="Nome"
                   required
+                  validate-on-blur
                 ></v-text-field>
               </v-col>
               <v-col cols="12">
@@ -37,9 +38,10 @@
                   outlined
                   v-model="formResponsible.cpf"
                   :rules="rules.cpf"
-                  v-mask="['###.###.###-##', '##.###.###/####-##']"
+                  v-mask="['###.###.###-##']"
                   label="CPF"
                   required
+                  validate-on-blur
                 ></v-text-field>
               </v-col>
               <v-col cols="12">
@@ -47,6 +49,8 @@
                   :input="{ label: 'Data de nascimento', rules: rules.date }"
                   :picker="{ type: 'date' }"
                   v-model="formResponsible.yearOld"
+                  required
+                  validate-on-blur
                 ></inputDate>
               </v-col>
               <v-col cols="12">
@@ -56,15 +60,21 @@
                   :rules="rules.email"
                   label="E-mail"
                   required
+                  validate-on-blur
                 ></v-text-field>
               </v-col>
               <v-col cols="12" class="d-flex justify-center align-center">
-                <v-btn color="#ff004e" dark>
+                <v-btn
+                  color="#ff004e"
+                  dark
+                  @click="saveFormResponsible()"
+                  :loading="loading"
+                >
                   salvar
                 </v-btn>
               </v-col>
             </v-row>
-          </form>
+          </v-form>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -95,6 +105,7 @@ export default {
   },
   data() {
     return {
+      loading: false,
       formResponsible: {
         idStudent: null,
         name: "",
@@ -112,7 +123,7 @@ export default {
         date: [
           (v) => !!v || "Data é obrigatorio!",
           (v) => {
-            let yearBirth = moment(this.form.yearOld)
+            let yearBirth = moment(this.formResponsible.yearOld)
               .date(1)
               .format("YYYY");
             let sub = this.dateNow - yearBirth;
@@ -129,6 +140,19 @@ export default {
         ],
       },
     };
+  },
+  methods: {
+    saveFormResponsible() {
+      if (this.$refs.form.validate()) {
+        this.loading = true;
+        setTimeout(() => {
+          this.loading = false;
+          return this.$router.push({
+            name: "Formacao",
+          });
+        }, 4000);
+      }
+    },
   },
 };
 </script>

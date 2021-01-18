@@ -48,7 +48,7 @@
     <!-- formulario de cadastro -->
 
     <v-container class="mt-12">
-      <form>
+      <v-form ref="form" lazy-validation>
         <v-row no-gutters justify="space-around">
           <v-col cols="12">
             <v-text-field
@@ -57,10 +57,12 @@
               :rules="rules.email"
               label="E-mail"
               required
+              validate-on-blur
             ></v-text-field>
           </v-col>
           <v-col cols="12">
             <v-text-field
+              validate-on-blur
               outlined
               v-model="form.password"
               :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
@@ -78,6 +80,7 @@
               :rules="rules.name"
               label="Nome"
               required
+              validate-on-blur
             ></v-text-field>
           </v-col>
           <v-col cols="12">
@@ -94,6 +97,7 @@
               :rules="rules.adress"
               label="Endereço"
               required
+              validate-on-blur
             ></v-text-field>
           </v-col>
           <v-col cols="12">
@@ -104,6 +108,7 @@
               v-mask="['###.###.###-##']"
               label="CPF"
               required
+              validate-on-blur
             ></v-text-field>
           </v-col>
           <v-col cols="12">
@@ -118,12 +123,12 @@
           </v-col>
 
           <v-col cols="12" class="d-flex justify-center align-center">
-            <v-btn @click="saveForm()" color="#ff004e" dark>
+            <v-btn @click="saveForm()" color="#ff004e" dark :loading="loading">
               salvar e continuar
             </v-btn>
           </v-col>
         </v-row>
-      </form>
+      </v-form>
     </v-container>
     <responsibleAccount
       v-model="openResponsibleAccount"
@@ -144,8 +149,9 @@ export default {
   },
   data() {
     return {
+      valid: true,
+      loading: false,
       openResponsibleAccount: false,
-      valid: "",
       showPassword: false,
       dateNow: moment().format("YYYY"),
       form: {
@@ -194,16 +200,18 @@ export default {
 
   methods: {
     responsible() {
-      let yearDiff = moment()
-        .year(this.form.yearOld)
-        .format("YYYY");
-      console.log("abriu", yearDiff);
       this.openResponsibleAccount = true;
     },
     saveForm() {
-      return this.$router.push({
-        name: "Formacao",
-      });
+      if (this.$refs.form.validate()) {
+        this.loading = true;
+        setTimeout(() => {
+          this.loading = false;
+          return this.$router.push({
+            name: "Formacao",
+          });
+        }, 4000);
+      }
     },
   },
 };

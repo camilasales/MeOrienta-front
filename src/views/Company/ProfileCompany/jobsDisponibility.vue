@@ -15,7 +15,7 @@
         <v-icon color="#000000">mdi-chevron-left</v-icon> voltar</v-btn
       >
       <div class="mt-2">
-        <form>
+        <v-form ref="form">
           <v-row no-gutters justify="space-around">
             <v-col cols="12">
               <v-text-field
@@ -24,6 +24,7 @@
                 :rules="rules.title"
                 label="Título da vaga"
                 required
+                validate-on-blur
               ></v-text-field>
             </v-col>
             <v-col cols="12">
@@ -33,6 +34,7 @@
                 :rules="rules.specialty"
                 label="Especialidade"
                 required
+                validate-on-blur
               ></v-text-field>
             </v-col>
             <v-col cols="12">
@@ -42,6 +44,7 @@
                 :rules="rules.salary"
                 label="Salário"
                 required
+                validate-on-blur
               ></v-text-field>
             </v-col>
             <v-col cols="12">
@@ -51,6 +54,7 @@
                 :rules="rules.adress"
                 label="Endereço"
                 required
+                validate-on-blur
               ></v-text-field>
             </v-col>
 
@@ -61,6 +65,7 @@
                 :rules="rules.state"
                 label="Estado"
                 required
+                validate-on-blur
               ></v-text-field>
             </v-col>
             <v-col cols="12">
@@ -70,16 +75,18 @@
                 :rules="rules.city"
                 label="Cidade"
                 required
+                validate-on-blur
               ></v-text-field>
             </v-col>
             <v-col cols="12">
-              <v-text-field
+              <v-textarea
                 outlined
                 v-model="form.description"
                 :rules="rules.description"
-                label="Descrição"
+                label="Descrição "
                 required
-              ></v-text-field>
+                validate-on-blur
+              ></v-textarea>
             </v-col>
             <v-col cols="12">
               <v-text-field
@@ -88,6 +95,7 @@
                 :rules="rules.benefits"
                 label="Beneficíos"
                 required
+                validate-on-blur
               ></v-text-field>
             </v-col>
             <v-col cols="12">
@@ -97,6 +105,7 @@
                 :rules="rules.requirements"
                 label="Requisitos"
                 required
+                validate-on-blur
               ></v-text-field>
             </v-col>
             <!-- <v-col>
@@ -128,7 +137,8 @@
               <v-btn
                 class="mb-2"
                 block
-                @click="saveForm()"
+                @click="createJob()"
+                :loading="loading"
                 color="#ff004e"
                 dark
               >
@@ -142,7 +152,7 @@
               </v-btn>
             </v-col>
           </v-row>
-        </form>
+        </v-form>
       </div>
     </v-col>
   </div>
@@ -155,6 +165,7 @@ export default {
   },
   data() {
     return {
+      loading: false,
       createNotice: false,
       listJobs: [
         {
@@ -203,6 +214,17 @@ export default {
         requirements: [(v) => !!v || "Por favor, preeencha os requisitos"],
       },
     };
+  },
+  methods: {
+    createJob() {
+      if (this.$refs.form.validate()) {
+        this.loading = true;
+        setTimeout(() => {
+          this.loading = false;
+          this.createNotice = false;
+        }, 4000);
+      }
+    },
   },
 };
 </script>

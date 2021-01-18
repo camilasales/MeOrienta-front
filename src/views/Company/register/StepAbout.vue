@@ -48,7 +48,7 @@
     <!-- formulario de cadastro -->
 
     <v-container class="mt-12">
-      <form>
+      <v-form ref="form">
         <v-row no-gutters justify="space-around">
           <v-col cols="12">
             <v-text-field
@@ -57,6 +57,7 @@
               :rules="rules.email"
               label="E-mail"
               required
+              validate-on-blur
             ></v-text-field>
           </v-col>
           <v-col cols="12">
@@ -78,6 +79,7 @@
               :rules="rules.nameResponsible"
               label="Nome do responsável"
               required
+              validate-on-blur
             ></v-text-field>
           </v-col>
           <v-col cols="12">
@@ -87,6 +89,7 @@
               :rules="rules.adress"
               label="Endereço"
               required
+              validate-on-blur
             ></v-text-field>
           </v-col>
           <v-col cols="12">
@@ -96,6 +99,7 @@
               :rules="rules.businessType"
               label="Ramo de atuação"
               required
+              validate-on-blur
             ></v-text-field>
           </v-col>
           <v-col cols="12">
@@ -106,6 +110,7 @@
               v-mask="['###.###.###-##', '##.###.###/####-##']"
               label="CPF"
               required
+              validate-on-blur
             ></v-text-field>
           </v-col>
           <v-col cols="12">
@@ -116,6 +121,7 @@
               v-mask="['(##)#####-####', '(##)####-####']"
               label="Telefone"
               required
+              validate-on-blur
             ></v-text-field>
           </v-col>
           <v-col cols="12">
@@ -124,16 +130,17 @@
               v-model="form.webSite"
               label="Website"
               required
+              validate-on-blur
             ></v-text-field>
           </v-col>
 
           <v-col cols="12" class="d-flex justify-center align-center">
-            <v-btn @click="saveForm()" color="#ff004e" dark>
+            <v-btn @click="saveForm()" color="#ff004e" dark :loading="loading">
               salvar e continuar
             </v-btn>
           </v-col>
         </v-row>
-      </form>
+      </v-form>
     </v-container>
   </div>
 </template>
@@ -142,7 +149,7 @@ export default {
   name: "StepAbout",
   data() {
     return {
-      valid: "",
+      loading: false,
       showPassword: false,
       form: {
         nameResponsible: "",
@@ -184,9 +191,15 @@ export default {
 
   methods: {
     saveForm() {
-      return this.$router.push({
-        path: "/perfil-empresa",
-      });
+      if (this.$refs.form.validate()) {
+        this.loading = true;
+        setTimeout(() => {
+          this.loading = false;
+          return this.$router.push({
+            path: "/perfil-empresa",
+          });
+        }, 4000);
+      }
     },
   },
 };
